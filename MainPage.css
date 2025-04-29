@@ -6,7 +6,7 @@ html
 
 body 
 {
-    margin: 0%;
+      margin: 0%;
     height: 100%;
 }
 
@@ -34,6 +34,14 @@ header
 .headerLink
 {
     text-align: center;
+}
+
+footer
+{
+    display: flex;
+    justify-content: space-between;
+    background-color: grey;
+    margin-top: auto;
 }
 
 .mosaïque

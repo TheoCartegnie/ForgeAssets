@@ -18,15 +18,40 @@
 
         <main>
             <h1>AssetForge</h1>
+            <input class ="Refresh" type="button" value="Refresh"/>
             <div id ="mosaïque"> 
             
             </div>  
         </main>
 
 
+        <footer>
+            <img class = "logo" src = "images/icons8-enclume-100.png" alt = "Picture of an enclume with a hammer on it, its the logo of the entreprise">
+            <h1> ASSET FORGE</h1>
+            <a class = "headerLink" href = "AboutUs.html"> About us</a>
+        </footer>
+
         <script>
 
+
+        const button = document.querySelector("input");
+        const paragraph = document.querySelector("p");
       
+
+        button.addEventListener("click",refreshText)
+
+        function refreshText()
+        {
+            
+                CleanText();
+                displayJokes();
+            
+        }
+
+        function CleanText()
+        {
+            document.getElementById("mosaïque").innerHTML = "";
+        }
 
         function addJokeToMosaik(setup, delivery) {
             var newDiv = document.createElement("div");
@@ -51,11 +76,16 @@
                 })
          
         }
-        document.body.onload = displayOneJoke;
-        for(var i = 0 ; i < 10; i++)
+
+        function displayJokes()
+        {
+            for(var i = 0 ; i < 10; i++)
             {
                 displayOneJoke();
             }
+        }
+        document.body.onload = displayOneJoke;
+        displayJokes();
         </script>
 
     </body>
