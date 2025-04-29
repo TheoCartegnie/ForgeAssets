@@ -1,0 +1,19 @@
+
+header
+{
+    background-color: grey;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+
+.mosaïque
+{
+    background-color: grey;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+}
