@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="MainPage.css"/>
+    </head>
+
+    <body>
+        <header>
+            <h1>Asset forge</h1>
+        </header>
+
+        <main>
+            <h1>AssetForge</h1>
+     
+            <div id ="setup">            
+                <h1>test</h1>
+            </div>
+
+            <div id ="delivery">            
+                <h1>test</h1>
+            </div>
+        </main>
+
+
+        <script>
+            fetch("https://v2.jokeapi.dev/joke/Any?lang=fr")
+            .then((res) => res.json())
+            .then((joke) => document.getElementById('setup').innerHTML = joke.setup)
+   
+        </script>
+        <script>
+            fetch("https://v2.jokeapi.dev/joke/Any?lang=fr")
+            .then((res) => res.json())
+            .then((joke) => document.getElementById('delivery').innerHTML = joke.delivery)
+   
+        </script>
+    </body>
+
+</html>
