@@ -12,29 +12,46 @@
 
         <main>
             <h1>AssetForge</h1>
-     
-            <div id ="setup">            
-                <h1>test</h1>
-            </div>
-
-            <div id ="delivery">            
-                <h1>test</h1>
-            </div>
+            <div id ="mosaïque"> 
+            
+            </div>  
         </main>
 
 
         <script>
+
+      
+
+        function addJokeToMosaik(setup, delivery) {
+            var newDiv = document.createElement("div");
+
+            var newContent = document.createTextNode(setup + "\n" + delivery + "\n");
+            
+            newDiv.appendChild(newContent);
+            
+            var currentDiv = document.getElementById("mosaïque");
+
+            currentDiv.appendChild(newDiv);
+        }
+
+        function displayOneJoke() {
+            // fetch + appel addJokeToMosaik
+            console.log("Im in code");
             fetch("https://v2.jokeapi.dev/joke/Any?lang=fr")
-            .then((res) => res.json())
-            .then((joke) => document.getElementById('setup').innerHTML = joke.setup)
-   
+                .then(rep => rep.json())
+                .then(joke => 
+                {
+                    addJokeToMosaik(joke.setup,joke.delivery);
+                })
+         
+        }
+        document.body.onload = displayOneJoke;
+        for(var i = 0 ; i < 10; i++)
+            {
+                displayOneJoke();
+            }
         </script>
-        <script>
-            fetch("https://v2.jokeapi.dev/joke/Any?lang=fr")
-            .then((res) => res.json())
-            .then((joke) => document.getElementById('delivery').innerHTML = joke.delivery)
-   
-        </script>
+
     </body>
 
 </html>
