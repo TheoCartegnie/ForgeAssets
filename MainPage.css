@@ -13,13 +13,27 @@ body
 header
 {
     display: flex;
+    flex-grow: 4;
+    flex-direction: row;
     background-color: grey;
-    text-align: center;
     width: 100%;
 }
-main
+
+.link
 {
-    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 34px;
+    width: 50%;
+    color: black;
+}
+
+.headerLink
+{
+    text-align: center;
 }
 
 .mosaïque
