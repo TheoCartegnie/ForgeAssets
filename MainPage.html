@@ -8,7 +8,7 @@
     <body>
         <header>
             <img class = "logo" src = "images/icons8-enclume-100.png" alt = "Picture of an enclume with a hammer on it, its the logo of the entreprise">
-            <h1>Asset forge</h1>
+            <h1 class="WebSiteTitle">Asset forge</h1>
             <div class = "link">
                 <a class = "headerLink" href = "ThemePage.html"> Gallery</a>
                 <a class = "headerLink" href = "GamePage.html"> Jeux</a>
@@ -21,6 +21,19 @@
             <input class ="Refresh" type="button" value="Refresh"/>
             <div id ="mosaïque"> 
             
+                <div class="gallery">
+                    <a target="_blank" href="images/PropsPicture/MilitaryProps.jpg">
+                    <img src="images/PropsPicture/MilitaryProps.jpg" alt="Cinque Terre" width="600" height="400">
+                    </a>
+                    <div class="desc">Add a description of the image here</div>
+                </div>
+
+                <div class="gallery">
+                    <a target="_blank" href="images/PropsPicture/MilitaryProps.jpg">
+                    <img src="images/PropsPicture/MilitaryProps.jpg" alt="Cinque Terre" width="600" height="400">
+                    </a>
+                    <div class="desc">Add a description of the image here</div>
+                </div>
             </div>  
         </main>
 
@@ -28,7 +41,8 @@
         <footer>
             <img class = "logo" src = "images/icons8-enclume-100.png" alt = "Picture of an enclume with a hammer on it, its the logo of the entreprise">
             <h1> ASSET FORGE</h1>
-            <a class = "headerLink" href = "AboutUs.html"> About us</a>
+             <a class = "footerLink" href = "AboutUs.html"> About us</a>
+          
         </footer>
 
         <script>
@@ -36,9 +50,12 @@
 
         const button = document.querySelector("input");
         const paragraph = document.querySelector("p");
-      
+
+
 
         button.addEventListener("click",refreshText)
+
+        const query = ''
 
         function refreshText()
         {
@@ -53,6 +70,74 @@
             document.getElementById("mosaïque").innerHTML = "";
         }
 
+
+        function AddDNDText(text)
+        {
+            var newDiv = document.createElement("div");
+
+            var NewDesc = document.createTextNode(text);
+
+            newDiv.appendChild(NewDesc);
+
+               
+            var currentDiv = document.getElementById("mosaïque");
+
+            currentDiv.appendChild(newDiv);
+
+        }
+
+        function AddPicture(pictueName,description)
+        {
+            console.log("L'index est a : " + pictueName);
+            var newDiv = document.createElement("div");
+            newDiv.className = "gallery";
+
+            var NewAnchor = AddAnchor(pictueName);
+            
+            var NewDesc = AddDescription(description,pictueName);            
+
+            var newPic = AddAPicture(pictueName);
+
+            NewAnchor.appendChild(newPic);
+            newDiv.appendChild(NewAnchor);
+            newDiv.appendChild(NewDesc);
+            
+            var currentDiv = document.getElementById("mosaïque");
+            
+            currentDiv.appendChild(newDiv);
+        }
+
+        function AddAnchor(pictureName)
+        {
+            var NewAnchor = document.createElement("a");
+            NewAnchor.target ="_blank";
+            NewAnchor.href = pictureName;
+
+            return NewAnchor;
+        }
+
+        function AddDescription(descriptionText,pictureName)
+        {
+            var NewDesc = document.createTextNode(descriptionText);
+            NewDesc.className = "desc";
+            NewDesc.target ="_blank";
+            NewDesc.href = pictureName;
+
+            return NewDesc;
+        }
+
+        function AddAPicture(pictureName)
+        {
+            var newPic = document.createElement("img");
+
+            newPic.className = "Logo";
+            newPic.src = pictureName;
+            newPic.style.width = 600; 
+            newPic.style.height = 400;
+
+            return newPic;
+        }
+
         function addJokeToMosaik(setup, delivery) {
             var newDiv = document.createElement("div");
 
@@ -65,9 +150,45 @@
             currentDiv.appendChild(newDiv);
         }
 
+
+function CAllDnDLIbrary()
+    {
+        const MyHeaders = new Headers();
+        MyHeaders.append("Accept","application/json");
+
+        const requestOptions = {
+            method :"GET",
+            Headers : MyHeaders,
+            redirect : "follow"
+        };
+
+const Fetch = fetch("https://www.dnd5eapi.co/api/2014/monsters", requestOptions);
+
+            Fetch.then((response) => response.json()).then(result => {
+                for(var i = 0; i < 10;i++)
+                {         
+                    var Monsterresult = fetch("https://www.dnd5eapi.co/api/2014/monsters/"+result.results[i].index);
+                    Monsterresult.then(response => response.json()).then(result => 
+                    {
+                        AddPicture("https://www.dnd5eapi.co"+result.image,result.name);
+                    });
+
+                
+                    
+                }
+            })
+ 
+
+    }
+
+        function displayOneCharacter()
+        {
+            fetch("https://www.dnd5eapi.co/api/2014/monsters").then(rep => rep.json()).then(data => console.log())
+        }
+
         function displayOneJoke() {
             // fetch + appel addJokeToMosaik
-            console.log("Im in code");
+
             fetch("https://v2.jokeapi.dev/joke/Any?lang=fr")
                 .then(rep => rep.json())
                 .then(joke => 
@@ -77,15 +198,32 @@
          
         }
 
-        function displayJokes()
+        function displayDNDMonster()
         {
-            for(var i = 0 ; i < 10; i++)
-            {
-                displayOneJoke();
-            }
+            CAllDnDLIbrary();
         }
-        document.body.onload = displayOneJoke;
-        displayJokes();
+    //     function displayJokes()
+    //     {
+    //         for(var i = 0 ; i < 27; i++)
+    //         {
+    //             displayOneJoke();
+    //         }
+    //     }
+
+    //     function displayPicure()
+    //     {
+    //         for(var i = 0 ; i < 36; i++)
+    //         {
+    //             AddPicture("MilitaryProps.jpg");
+    //         }
+    //     }
+
+    //     document.body.onload = displayOneJoke;
+      
+    //    // displayJokes();
+    //     displayPicure();
+    displayDNDMonster();
+    //     test();
         </script>
 
     </body>
