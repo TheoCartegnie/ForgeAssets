@@ -1,4 +1,6 @@
 
+
+
 html
 {
     height : auto;
@@ -16,6 +18,53 @@ header
     flex-direction: row;
     background-color: grey;
     width: 100%;
+}
+
+
+.pics
+{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.Profilpic
+{
+    padding-left: 5%;
+    padding-right: 5%;
+    height: 150px;
+    width: auto;
+    text-align: center;
+}
+
+.ABoutUsClassTitle
+{
+    text-align: center;
+}
+
+.PresentationAboutUs
+{
+    display:flex;
+    height: 75%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.PresentationAboutusText
+{
+    height: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.PresentationAboutUsTitle
+{
+    text-align: center;
+}
+
+.PresentationRect
+{
+    width: 20%;
+    height: auto;
 }
 
 .link
@@ -52,8 +101,8 @@ footer
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
-    bottom: 0;
+    
+    bottom: 100%;
     left: 0;
     width: 100%;
  
@@ -91,3 +140,79 @@ div.gallery:hover {
 
     text-align: center;
   }
+
+
+   /* Dropdown Button */
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+
+
+.feedbtn
+{
+    background-color: grey;
+    color: black;
+    padding: 6px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.feed-content{
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    height: 30%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.textfield
+{
+    height: 50%;
+    width: 90%;
+    vertical-align: top;
+}
+
+.show {display: block;} 
