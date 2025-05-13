@@ -19,34 +19,36 @@ function CleanText()
     document.getElementById("mosaïque").innerHTML = "";
 }
 
+
+function GetPromptText()
+{
+    var x = document.getElementById("Promptframe").value;
+    return x;
+}
+
 function AddDynamicPrompt(text)
 {
     var newDiv = document.createElement("div");
+    newDiv.className = "feed-content";
 
     var NewDesc = document.createTextNode(text);
-    
-
-
     newDiv.appendChild(NewDesc);
 
     var currentDiv = document.getElementById("feederMosaik");
-
     currentDiv.appendChild(newDiv);
+    currentDiv.classList.toggle("show");
 }
 
 function AddDNDText(text)
 {
     var newDiv = document.createElement("div");
-    newDiv.className("textFeedRect");
+ 
     var NewDesc = document.createTextNode(text);
-
     newDiv.appendChild(NewDesc);
 
        
     var currentDiv = document.getElementById("mosaïque");
-
     currentDiv.appendChild(newDiv);
-
 }
 
 function AddPicture(pictueName,description)
@@ -159,7 +161,7 @@ function displayOneJoke() {
 
 function AddContent()
 {
-    AddDynamicPrompt("Ceci est un test");
+    AddDynamicPrompt(GetPromptText());
 }
 
 function displayDNDMonster()

@@ -112,17 +112,34 @@ footer
 
 .mosaïque 
 {
-    background-color: grey;
-    text-align: center;
-    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #f4f4f4;
+    border: 2px solid #333;
 }
 
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
 
-.feederMosaik
-{
-    background-color: grey;
-    text-align: center;
-    width: 100%;
+#image-section {
+    background-color: #fff;
+}
+
+#text-section {
+    background-color: #f0f0f0;
+}
+
+.feederMosaik {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #e0e0e0;
+    border: 2px solid #333;
 }
 /*GALLERY*/
 
@@ -205,24 +222,16 @@ div.gallery:hover {
 }
 
 .feed-content{
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    margin-left: 5%;
-    margin-right: 5%;
-    width: 90%;
-    height: 30%;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    display: block;
+    padding: 1rem;
+    margin: 1rem 0;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
 }
 
-
-.textFeedRect
-{
-    box-shadow: 0px 8px 16px 0px black;
-    height: 50%;
+.textFeedRect {
     width: 90%;
-    vertical-align: top;
+    height: 150px;
 }
 
 
