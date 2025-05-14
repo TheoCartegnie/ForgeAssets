@@ -3,14 +3,9 @@ const button = document.querySelector("input");
 const paragraph = document.querySelector("p");
 
 
-
-
-
-const query = ''
-
-class Gallery
+class Utilities
 {
-    PictureRect()
+    Utilities()
     {
 
     }
@@ -38,8 +33,26 @@ class Gallery
     }
 
 
+    AddAnchor(pictureName)
+    {
+        var NewAnchor = document.createElement("a");
+        NewAnchor.target ="_blank";
+        NewAnchor.href = pictureName;
+
+        return NewAnchor;
+    }
+}
 
 
+const query = ''
+
+class Gallery
+{
+
+    constructor()
+    {
+        this.utilities = new Utilities();
+    }
 
     AddText(text)
     {
@@ -53,14 +66,7 @@ class Gallery
         currentDiv.appendChild(newDiv);
     }
 
-    AddAnchor(pictureName)
-    {
-        var NewAnchor = document.createElement("a");
-        NewAnchor.target ="_blank";
-        NewAnchor.href = pictureName;
 
-        return NewAnchor;
-    }
 
 
     RefreshText()
@@ -82,11 +88,11 @@ class Gallery
         var newDiv = document.createElement("div");
         newDiv.className = "gallery";
     
-        var NewAnchor = this.AddAnchor(pictueName);
+        var NewAnchor = this.utilities.AddAnchor(pictueName);
         
-        var NewDesc = this.AddDescription(description,pictueName);            
+        var NewDesc = this.utilities.AddDescription(description,pictueName);            
     
-        var newPic = this.AddAPicture(pictueName);
+        var newPic = this.utilities.AddAPicture(pictueName);
     
         NewAnchor.appendChild(newPic);
         newDiv.appendChild(NewAnchor);
@@ -133,6 +139,11 @@ class Gallery
 
 class Comment{
 
+    constructor()
+    {
+        this.utilities = new Utilities();
+    }
+
     GetPromptText()
     {
         var x = document.getElementById("Promptframe").value;
@@ -153,15 +164,6 @@ class Comment{
     }
     
     
-    
-    AddAnchor(pictureName)
-    {
-        var NewAnchor = document.createElement("a");
-        NewAnchor.target ="_blank";
-        NewAnchor.href = pictureName;
-    
-        return NewAnchor;
-    }
     
     
     addJokeToMosaik(setup, delivery) {
