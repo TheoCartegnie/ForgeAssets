@@ -4,143 +4,195 @@ const paragraph = document.querySelector("p");
 
 
 
-button.addEventListener("click",refreshText)
+
 
 const query = ''
 
-function refreshText()
+class Gallery
 {
-        CleanText();
-        CallDnDLIbrary();
-}
+    PictureRect()
+    {
 
-function CleanText()
-{
-    document.getElementById("mosaïque").innerHTML = "";
-}
+    }
 
-
-function GetPromptText()
-{
-    var x = document.getElementById("Promptframe").value;
-    return x;
-}
-
-function AddDynamicPrompt(text)
-{
-    var newDiv = document.createElement("div");
-    newDiv.className = "feed-content";
-
-    var NewDesc = document.createTextNode(text);
-    newDiv.appendChild(NewDesc);
-
-    var currentDiv = document.getElementById("feederMosaik");
-    currentDiv.appendChild(newDiv);
-    currentDiv.classList.toggle("show");
-}
-
-function AddDNDText(text)
-{
-    var newDiv = document.createElement("div");
- 
-    var NewDesc = document.createTextNode(text);
-    newDiv.appendChild(NewDesc);
-
-       
-    var currentDiv = document.getElementById("mosaïque");
-    currentDiv.appendChild(newDiv);
-}
-
-function AddPicture(pictueName,description)
-{
-    var newDiv = document.createElement("div");
-    newDiv.className = "gallery";
-
-    var NewAnchor = AddAnchor(pictueName);
+    AddDescription(descriptionText,pictureName)
+    {
+        var NewDesc = document.createTextNode(descriptionText);
+        NewDesc.className = "desc";
+        NewDesc.target ="_blank";
+        NewDesc.href = pictureName;
     
-    var NewDesc = AddDescription(description,pictueName);            
-
-    var newPic = AddAPicture(pictueName);
-
-    NewAnchor.appendChild(newPic);
-    newDiv.appendChild(NewAnchor);
-    newDiv.appendChild(NewDesc);
+        return NewDesc;
+    }
     
-    var currentDiv = document.getElementById("mosaïque");
+    AddAPicture(pictureName)
+    {
+        var newPic = document.createElement("img");
     
-    currentDiv.appendChild(newDiv);
-}
-
-function AddAnchor(pictureName)
-{
-    var NewAnchor = document.createElement("a");
-    NewAnchor.target ="_blank";
-    NewAnchor.href = pictureName;
-
-    return NewAnchor;
-}
-
-function AddDescription(descriptionText,pictureName)
-{
-    var NewDesc = document.createTextNode(descriptionText);
-    NewDesc.className = "desc";
-    NewDesc.target ="_blank";
-    NewDesc.href = pictureName;
-
-    return NewDesc;
-}
-
-function AddAPicture(pictureName)
-{
-    var newPic = document.createElement("img");
-
-    newPic.className = "Logo";
-    newPic.src = pictureName;
-    newPic.style.width = 600; 
-    newPic.style.height = 400;
-
-    return newPic;
-}
-
-function addJokeToMosaik(setup, delivery) {
-    var newDiv = document.createElement("div");
-
-    var newContent = document.createTextNode(setup + "\n" + delivery + "\n");
+        newPic.className = "Logo";
+        newPic.src = pictureName;
+        newPic.style.width = 600; 
+        newPic.style.height = 400;
     
-    newDiv.appendChild(newContent);
+        return newPic;
+    }
+
+
+
+
+
+    AddText(text)
+    {
+        var newDiv = document.createElement("div");
+     
+        var NewDesc = document.createTextNode(text);
+        newDiv.appendChild(NewDesc);
     
-    var currentDiv = document.getElementById("mosaïque");
+           
+        var currentDiv = document.getElementById("mosaïque");
+        currentDiv.appendChild(newDiv);
+    }
 
-    currentDiv.appendChild(newDiv);
+    AddAnchor(pictureName)
+    {
+        var NewAnchor = document.createElement("a");
+        NewAnchor.target ="_blank";
+        NewAnchor.href = pictureName;
+
+        return NewAnchor;
+    }
+
+
+    RefreshText()
+    {
+        this.CleanText();
+        this.CallDnDLIbrary();
+    }
+    
+    CleanText()
+    {
+        document.getElementById("mosaïque").innerHTML = "";
+    }
+
+    
+
+
+    AddPicture(pictueName,description)
+    {
+        var newDiv = document.createElement("div");
+        newDiv.className = "gallery";
+    
+        var NewAnchor = this.AddAnchor(pictueName);
+        
+        var NewDesc = this.AddDescription(description,pictueName);            
+    
+        var newPic = this.AddAPicture(pictueName);
+    
+        NewAnchor.appendChild(newPic);
+        newDiv.appendChild(NewAnchor);
+        newDiv.appendChild(NewDesc);
+        
+        var currentDiv = document.getElementById("mosaïque");
+        
+        currentDiv.appendChild(newDiv);
+    }
+
+    CallDnDLIbrary()
+    {
+    const MyHeaders = new Headers();
+    MyHeaders.append("Accept","application/json");
+
+    const requestOptions = {
+        method :"GET",
+        Headers : MyHeaders,
+        redirect : "follow"
+    };
+
+    const Fetch = fetch("https://www.dnd5eapi.co/api/2014/monsters", requestOptions);
+
+        Fetch.then((response) => response.json()).then(result => {
+            for(var i = 0; i < 30;i++)
+            {         
+                var Monsterresult = fetch("https://www.dnd5eapi.co/api/2014/monsters/"+result.results[i].index);
+                Monsterresult.then(response => response.json()).then(result => 
+                {
+                    this.AddPicture("https://www.dnd5eapi.co"+result.image,result.name);
+                });
+            }
+        })
+
+
+    }
+
+
+    displayDNDMonster()
+    {
+        this.CallDnDLIbrary();
+    }
+}
+
+class Comment{
+
+    GetPromptText()
+    {
+        var x = document.getElementById("Promptframe").value;
+        return x;
+    }
+    
+    AddDynamicPrompt(text)
+    {
+        var newDiv = document.createElement("div");
+        newDiv.className = "feed-content";
+    
+        var NewDesc = document.createTextNode(text);
+        newDiv.appendChild(NewDesc);
+    
+        var currentDiv = document.getElementById("feederMosaik");
+        currentDiv.appendChild(newDiv);
+        currentDiv.classList.toggle("show");
+    }
+    
+    
+    
+    AddAnchor(pictureName)
+    {
+        var NewAnchor = document.createElement("a");
+        NewAnchor.target ="_blank";
+        NewAnchor.href = pictureName;
+    
+        return NewAnchor;
+    }
+    
+    
+    addJokeToMosaik(setup, delivery) {
+        var newDiv = document.createElement("div");
+    
+        var newContent = document.createTextNode(setup + "\n" + delivery + "\n");
+        
+        newDiv.appendChild(newContent);
+        
+        var currentDiv = document.getElementById("mosaïque");
+    
+        currentDiv.appendChild(newDiv);
+    }
+    
+    AddContent()
+    {
+        this.AddDynamicPrompt(this.GetPromptText());
+    }
+
+
+    DisplayFeeder()
+    {
+        document.getElementById("feeder").classList.toggle("show");
+    }
+
 }
 
 
-function CallDnDLIbrary()
-{
-const MyHeaders = new Headers();
-MyHeaders.append("Accept","application/json");
-
-const requestOptions = {
-    method :"GET",
-    Headers : MyHeaders,
-    redirect : "follow"
-};
-
-const Fetch = fetch("https://www.dnd5eapi.co/api/2014/monsters", requestOptions);
-
-    Fetch.then((response) => response.json()).then(result => {
-        for(var i = 0; i < 30;i++)
-        {         
-            var Monsterresult = fetch("https://www.dnd5eapi.co/api/2014/monsters/"+result.results[i].index);
-            Monsterresult.then(response => response.json()).then(result => 
-            {
-                AddPicture("https://www.dnd5eapi.co"+result.image,result.name);
-            });
-        }
-    })
 
 
-}
+
 
 function displayOneCharacter()
 {
@@ -159,20 +211,7 @@ function displayOneJoke() {
  
 }
 
-function AddContent()
-{
-    AddDynamicPrompt(GetPromptText());
-}
 
-function displayDNDMonster()
-{
-    CallDnDLIbrary();
-}
-
-function DisplayFeeder()
-{
-    document.getElementById("feeder").classList.toggle("show");
-}
 
 function DisplayDropDown()
 {
@@ -197,4 +236,7 @@ window.onclick = function(event)
 }
 
 
-displayDNDMonster();
+const gallery = new Gallery();
+const commentZOne = new Comment();
+button.addEventListener("click",gallery.refreshText)
+gallery.displayDNDMonster();
