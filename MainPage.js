@@ -48,10 +48,13 @@ const query = ''
 
 class Gallery
 {
-
+    MozaikID = "mosaïque"
+    CollumnID = "collumn"
+    CurrentOrganszation = this.MozaikID;
     constructor()
     {
         this.utilities = new Utilities();
+        this.CurrentOrganszation = this.MozaikID;
     }
 
     AddText(text)
@@ -78,7 +81,7 @@ class Gallery
         document.getElementById("collumn").innerHTML = "";
     }
 
-    AddPicture(pictueName,description,blocktoattach)
+    AddPicture(pictueName,description)
     {
         var newDiv = document.createElement("div");
         newDiv.className = "gallery";
@@ -93,14 +96,13 @@ class Gallery
         newDiv.appendChild(NewAnchor);
         newDiv.appendChild(NewDesc);
 
-        console.log(blocktoattach);
-        
-        var currentDiv = document.getElementById(blocktoattach);
+   
+        var currentDiv = document.getElementById(this.CurrentOrganszation);
         
         currentDiv.appendChild(newDiv);
     }
 
-    CallDnDLIbrary(blocktoattach)
+    CallDnDLIbrary()
     {
     const MyHeaders = new Headers();
     MyHeaders.append("Accept","application/json");
@@ -114,12 +116,12 @@ class Gallery
     const Fetch = fetch(this.GetPicturePath(), requestOptions);
 
         Fetch.then((response) => response.json()).then(result => {
-            for(var i = 0; i < NumberPicToDisplay;i++)
+            for(var i = 0; i < CurrenPicNumber;i++)
             {         
                 var Monsterresult = fetch(this.GetPicturePath() +result.results[i].index);
                 Monsterresult.then(response => response.json()).then(result => 
                 {
-                    this.AddPicture("https://www.dnd5eapi.co"+result.image,result.name,blocktoattach);
+                    this.AddPicture("https://www.dnd5eapi.co"+result.image,result.name);
                 });
             }
         })
@@ -127,7 +129,7 @@ class Gallery
 
     }
 
-    AddOnePicture(blocktoattach)
+    AddOnePicture()
     {
         const MyHeaders = new Headers();
         MyHeaders.append("Accept","application/json");
@@ -144,7 +146,7 @@ class Gallery
             var Monsterresult = fetch(this.GetPicturePath() +result.results[CurrenPicNumber].index);
             Monsterresult.then(response => response.json()).then(result => 
             {
-               this.AddPicture("https://www.dnd5eapi.co"+result.image,result.name,blocktoattach);
+               this.AddPicture("https://www.dnd5eapi.co"+result.image,result.name);
             });
         })
 
@@ -152,6 +154,16 @@ class Gallery
         CurrenPicNumber++;
     }
     
+
+    SetMozaikPath()
+    {
+        this.CurrentOrganszation = this.MozaikID;
+    }
+
+    SetCollumnPath()
+    {
+        this.CurrentOrganszation = this.CollumnID;
+    }
 
     GetPicturePath()
     {
@@ -272,7 +284,8 @@ function DisplayInMozaik()
 {
     gallery.CleanCollumn();
     gallery.CleanMozaik();
-    gallery.CallDnDLIbrary("mosaïque");
+    gallery.SetMozaikPath();
+    gallery.CallDnDLIbrary();
 
 }
 
@@ -285,7 +298,8 @@ function DisplayInCollumn()
 {
     gallery.CleanMozaik();
     gallery.CleanCollumn();
-    gallery.CallDnDLIbrary("collumn");
+    gallery.SetCollumnPath();
+    gallery.CallDnDLIbrary();
 }
 
 function AddAPicture()
