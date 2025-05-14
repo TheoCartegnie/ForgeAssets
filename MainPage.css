@@ -143,6 +143,35 @@ footer
 }
 /*GALLERY*/
 
+.mozaikDisplay
+{
+
+}
+
+.collumnDisplay
+{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+}
+
+.ButtonPanel
+{
+    display: flex;
+    flex-direction: row;
+    
+    height: 40px;
+    width: 100px;
+}
+
+.DisplayButtonPanel
+{
+    margin-right: 5px;
+    height: auto;
+    width: 100%;
+}
+
 div.gallery{
     margin: 5px;
     border: 1px solid #ccc;

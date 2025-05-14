@@ -1,74 +1,85 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="MainPage.css"/>
-        <link rel="codesheet" href="MainPage.js"/>
-     
-    </head>
 
-    <body>
-        <header>
-            <img class = "logo" src = "images/icons8-enclume-100.png" alt = "Picture of an enclume with a hammer on it, its the logo of the entreprise">
-            <h1 class="WebSiteTitle">Asset forge</h1>
-            <div class = "link">
-                <a class = "headerLink" href = "MainPage.html"> Gallery</a>
-                <a class = "headerLink" href = "GamePage.html"> Jeux</a>
-                <a class = "headerLink" href = "AboutUs.html"> About us</a>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="MainPage.css" />
+    <link rel="codesheet" href="MainPage.js" />
+
+</head>
+
+<body>
+
+    <header>
+        <img class="logo" src="images/icons8-enclume-100.png"
+            alt="Picture of an enclume with a hammer on it, its the logo of the entreprise">
+        <h1 class="WebSiteTitle">Asset forge</h1>
+        <div class="link">
+            <a class="headerLink" href="MainPage.html"> Gallery</a>
+            <a class="headerLink" href="GamePage.html"> Jeux</a>
+            <a class="headerLink" href="AboutUs.html"> About us</a>
+
+
+            <div id="NavigationDropDown" class="dropdown-content">
+                <a class="headerLink" href="MainPage.html"> Gallery</a>
+                <a class="headerLink" href="GamePage.html"> Jeux</a>
+                <a class="headerLink" href="AboutUs.html"> About us</a>
             </div>
+        </div>
 
-            <div class = "dropdown">
-                <button onclick="DisplayDropDown()" class = "dropbtn">DropDown</button>
-                <div id="NavigationDropDown" class="dropdown-content">
-                    <a class = "headerLink" href = "MainPage.html"> Gallery</a>
-                    <a class = "headerLink" href = "GamePage.html"> Jeux</a>
-                    <a class = "headerLink" href = "AboutUs.html"> About us</a>
-                  </div>
-            </div>
+    </header>
 
-        </header>
+    <main>
+        
+        <button onclick="DisplayDropDown()" class="dropbtn">DropDown</button>
+        <h1>AssetForge</h1>
 
-        <main>
-            <h1>AssetForge</h1>
-
-
-            <input class ="Refresh" type="button" value="Refresh"/>
+        <div class="ButtonPanel">
+            
+            <button onclick=DisplayInMozaik() class="DisplayButtonPanel">Mozaïque</button>
+            <button onclick= DisplayInCollumn() class="DisplayButtonPanel">Collumn</button>
+            <button onclick= AddAPicture() class = "DisplayButtonPanel">+</button>
+        </div>
+ 
+        <div class="dropdown">
+            <input class="Refresh" type="button" value="Refresh" />
 
             <div class="wrapper">
-
-                <section id = "image-section">
-                    <div id ="mosaïque"></div>
-                </section>
-
-                <section id = "text-section">
-                    <div id = "feederMosaik" class ="feedMosaik"></div>
+                <div>
+                        <div id="mosaïque" class = "mozaikDisplay"></div>
+                        <div id ="collumn" class = "collumnDisplay"></div>
+                </div>
+                <section id="text-section">
+                    <div id="feederMosaik" class="feedMosaik"></div>
                 </section>
 
             </div>
-            
-            <div class = "feed">
-                <button onclick="commentZOne.DisplayFeeder()" class = "feedbtn">add content</button>
+
+            <div class="feed">
+                <button onclick="commentZOne.DisplayFeeder()" class="feedbtn">add content</button>
                 <div id="feeder" class="feed-content">
-                    <label for ="fname">Name :</label>
-                    <input type ="text" id ="Nameframe" name = "fname"><br><br>
-                    <label for ="fname">Description :</label>
-                    <textarea type ="text" id ="Promptframe" name = "fname" class ="textFeedRect">Decrivez votre créature idéal</textarea><br><br>
-                    <button onclick="commentZOne.AddContent()" class = "feedbtn">add sheet</button>
+                    <label for="fname">Name :</label>
+                    <input type="text" id="Nameframe" name="fname"><br><br>
+                    <label for="fname">Description :</label>
+                    <textarea type="text" id="Promptframe" name="fname"
+                        class="textFeedRect">Decrivez votre créature idéal</textarea><br><br>
+                    <button onclick="commentZOne.AddContent()" class="feedbtn">add sheet</button>
                 </div>
             </div>
-        
-        </main>
+
+    </main>
 
 
-        <footer>
-            <img class = "logo" src = "images/icons8-enclume-100.png" alt = "Picture of an enclume with a hammer on it, its the logo of the entreprise">
-            <h1> ASSET FORGE</h1>
-             <a class = "footerLink" href = "AboutUs.html"> About us</a>
-          
-        </footer>
+    <footer>
+        <img class="logo" src="images/icons8-enclume-100.png"
+            alt="Picture of an enclume with a hammer on it, its the logo of the entreprise">
+        <h1> ASSET FORGE</h1>
+        <a class="footerLink" href="AboutUs.html"> About us</a>
 
-     
-        <script type="text/javascript" src = "MainPage.js"></script>
-    </body>
+    </footer>
+
+
+    <script type="text/javascript" src="MainPage.js"></script>
+</body>
 
 </html>

@@ -1,8 +1,8 @@
 
 const button = document.querySelector("input");
 const paragraph = document.querySelector("p");
-
-
+var NumberPicToDisplay = 30;
+var CurrenPicNumber = NumberPicToDisplay;
 class Utilities
 {
     Utilities()
@@ -66,24 +66,19 @@ class Gallery
         currentDiv.appendChild(newDiv);
     }
 
-
-
-
-    RefreshText()
-    {
-        this.CleanText();
-        this.CallDnDLIbrary();
-    }
     
-    CleanText()
+    CleanMozaik()
     {
         document.getElementById("mosaïque").innerHTML = "";
     }
 
     
+    CleanCollumn()
+    {
+        document.getElementById("collumn").innerHTML = "";
+    }
 
-
-    AddPicture(pictueName,description)
+    AddPicture(pictueName,description,blocktoattach)
     {
         var newDiv = document.createElement("div");
         newDiv.className = "gallery";
@@ -97,13 +92,15 @@ class Gallery
         NewAnchor.appendChild(newPic);
         newDiv.appendChild(NewAnchor);
         newDiv.appendChild(NewDesc);
+
+        console.log(blocktoattach);
         
-        var currentDiv = document.getElementById("mosaïque");
+        var currentDiv = document.getElementById(blocktoattach);
         
         currentDiv.appendChild(newDiv);
     }
 
-    CallDnDLIbrary()
+    CallDnDLIbrary(blocktoattach)
     {
     const MyHeaders = new Headers();
     MyHeaders.append("Accept","application/json");
@@ -114,20 +111,51 @@ class Gallery
         redirect : "follow"
     };
 
-    const Fetch = fetch("https://www.dnd5eapi.co/api/2014/monsters", requestOptions);
+    const Fetch = fetch(this.GetPicturePath(), requestOptions);
 
         Fetch.then((response) => response.json()).then(result => {
-            for(var i = 0; i < 30;i++)
+            for(var i = 0; i < NumberPicToDisplay;i++)
             {         
-                var Monsterresult = fetch("https://www.dnd5eapi.co/api/2014/monsters/"+result.results[i].index);
+                var Monsterresult = fetch(this.GetPicturePath() +result.results[i].index);
                 Monsterresult.then(response => response.json()).then(result => 
                 {
-                    this.AddPicture("https://www.dnd5eapi.co"+result.image,result.name);
+                    this.AddPicture("https://www.dnd5eapi.co"+result.image,result.name,blocktoattach);
                 });
             }
         })
 
 
+    }
+
+    AddOnePicture(blocktoattach)
+    {
+        const MyHeaders = new Headers();
+        MyHeaders.append("Accept","application/json");
+    
+        const requestOptions = {
+            method :"GET",
+            Headers : MyHeaders,
+            redirect : "follow"
+        };
+
+        const Fetch = fetch(this.GetPicturePath(), requestOptions);
+
+            Fetch.then((response) => response.json()).then(result => {
+            var Monsterresult = fetch(this.GetPicturePath() +result.results[CurrenPicNumber].index);
+            Monsterresult.then(response => response.json()).then(result => 
+            {
+               this.AddPicture("https://www.dnd5eapi.co"+result.image,result.name,blocktoattach);
+            });
+        })
+
+
+        CurrenPicNumber++;
+    }
+    
+
+    GetPicturePath()
+    {
+        return "https://www.dnd5eapi.co/api/2014/monsters/";
     }
 
 
@@ -238,7 +266,34 @@ window.onclick = function(event)
 }
 
 
+
 const gallery = new Gallery();
+function DisplayInMozaik()
+{
+    gallery.CleanCollumn();
+    gallery.CleanMozaik();
+    gallery.CallDnDLIbrary("mosaïque");
+
+}
+
+function AddContentOnGrid()
+{
+    gallery.AddPicture();
+}
+
+function DisplayInCollumn()
+{
+    gallery.CleanMozaik();
+    gallery.CleanCollumn();
+    gallery.CallDnDLIbrary("collumn");
+}
+
+function AddAPicture()
+{
+    gallery.AddOnePicture("mosaïque");
+}
+
+
 const commentZOne = new Comment();
 button.addEventListener("click",gallery.refreshText)
-gallery.displayDNDMonster();
+button.addEventListener("",gallery.AddOnePicture)
