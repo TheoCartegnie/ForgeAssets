@@ -175,6 +175,13 @@ class Gallery
     {
         this.CallDnDLIbrary();
     }
+
+    refreshDisplay()
+    {
+        gallery.CleanCollumn();
+        gallery.CleanMozaik();
+        gallery.CallDnDLIbrary();
+    }
 }
 
 class Comment{
@@ -282,11 +289,9 @@ window.onclick = function(event)
 const gallery = new Gallery();
 function DisplayInMozaik()
 {
-    gallery.CleanCollumn();
-    gallery.CleanMozaik();
+ 
     gallery.SetMozaikPath();
-    gallery.CallDnDLIbrary();
-
+    gallery.refreshDisplay();
 }
 
 function AddContentOnGrid()
@@ -296,10 +301,8 @@ function AddContentOnGrid()
 
 function DisplayInCollumn()
 {
-    gallery.CleanMozaik();
-    gallery.CleanCollumn();
     gallery.SetCollumnPath();
-    gallery.CallDnDLIbrary();
+    gallery.refreshDisplay();
 }
 
 function AddAPicture()
@@ -309,5 +312,5 @@ function AddAPicture()
 
 
 const commentZOne = new Comment();
-button.addEventListener("click",gallery.refreshText)
+button.addEventListener("click",gallery.refreshDisplay)
 button.addEventListener("",gallery.AddOnePicture)
